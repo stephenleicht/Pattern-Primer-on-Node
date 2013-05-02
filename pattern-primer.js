@@ -1,16 +1,6 @@
 /*jslint nomen: true */
 'use strict';
 
-//settings = {
-//    webserverport : '8080',
-//    wwwroot: 'public',
-//    pattern_path: 'public/patterns',
-//    sourcehtmlfile: 'source.html',
-//    tofile_outputpath: 'docs'
-//},
-
-
-
 var util = require('util'),
     settings = require('./pp-settings.json'),
 	connect = require('connect'),
@@ -23,30 +13,15 @@ var util = require('util'),
 				return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 			},
 			outputPatterns = function (patterns) {
-				fs.readFile(settings.sourcehtmlfile, 'utf-8', function (err, content) {
-					if (err !== null) {
-						util.puts('There was an error when trying to read file:', 'output.html');
-						return;
-					}
+				fs.readFile(settings.source_html_file, 'utf-8', function (err, content) {
+                    if (err !== null) {
+                        util.puts('There was an error when trying to read file:', 'output.html');
+                        return;
+                    }
 
-					var i,
-						l,
-						file;
+                    content += generatePatterns(patterns);
 
-					for (i = 0, l = patterns.length; i < l; i += 1) {
-						file = patterns[i];
-						content += '<div class="pattern"><div class="display">';
-						content += file.content;
-					    content += '</div><div class="source"><textarea rows="6" cols="30">';
-					    content += simpleEscaper(file.content);
-					    content += '</textarea>';
-						if (!tofile) {
-							content += '<p><a href="patterns/' + file.filename + '">' + file.filename + '</a></p>';
-						}
-						content += '</div></div>';
-					}
-
-					content += '</body></html>';
+                    content += '</body></html>';
 
 					if (tofile) {
 						tofileCallback(content);
@@ -55,42 +30,90 @@ var util = require('util'),
 					}
 				});
 			},
-			handleFiles = function (files) {
-				var i,
-					l,
-					file,
-					patterns = [];
+            generatePatterns = function(patterns)
+            {
+                var content = "";
+                var i,
+                    l,
+                    file;
 
-				// This was asyncronous, but we need the file names, which we can't get from the callback of 'readFile'
-				for (i = 0, l = files.length; i < l; i += 1) {
-					file = {
-						filename : files[i]
-					};
+                for (i = 0, l = patterns.length; i < l; i += 1)
+                {
+                    file = patterns[i];
 
-					file.content = fs.readFileSync(patternFolder + '/' + file.filename, 'utf-8');
-					patterns.push(file);
-				}
+                    if(!file.isFile)
+                    {
+                        content += '<h2>' + file.filename + '</h2>';
+                        content += generatePatterns(file.subFiles);
+                    }
+                    else
+                    {
+                        var fileNameNoExt = file.filename.replace('.html', '');
 
-				outputPatterns(patterns);
+                        content += '<h3>' + fileNameNoExt +'</h3>';
+                        content += '<div class="pattern"><div class="display">';
+                        content += file.content;
+                        content += '</div><div class="source"><textarea rows="6" cols="30">';
+                        content += simpleEscaper(file.content);
+                        content += '</textarea>';
+
+                        content += '</div></div>';
+                    }
+                }
+
+                return content;
+
+            },
+			handleFiles = function (items, pathPrefix) {
+                var file,
+                    patterns = [];
+
+                // This was asyncronous, but we need the file names, which we can't get from the callback of 'readFile'
+                for (var i = 0, len = items.length; i < len; i += 1)
+                {
+                    var item = items[i];
+                    var path = pathPrefix == "" ? item : pathPrefix + "/" + item;
+                    var stat = fs.statSync(patternFolder + "/" + path);
+
+                    if(stat.isDirectory())
+                    {
+                        var subFiles = fs.readdirSync(patternFolder + "/" + path);
+
+                        file =
+                        {
+                            isFile: false,
+                            filename: item
+                        };
+
+                        file.subFiles = handleFiles(subFiles, path);
+
+                        if(file.subFiles.length != 0)
+                            patterns.push(file);
+                    }
+                    else if(stat.isFile() && item.substr(-5) === '.html')
+                    {
+                        file = {
+                            isFile: true,
+                            filename: item
+                        };
+
+                        file.content = fs.readFileSync(patternFolder + '/' + path, 'utf-8');
+                        patterns.push(file);
+                    }
+                }
+
+                return patterns;
 			},
 			beginProcess = function () {
 				fs.readdir(patternFolder, function (err, contents) {
-					if (err !== null && err.code === 'ENOENT') {
-						util.puts('Cannot find patterns folder:', patternFolder);
-						return;
-					}
+                    if (err !== null && err.code === 'ENOENT') {
+                        util.puts('Cannot find patterns folder:', patternFolder);
+                        return;
+                    }
 
-					var files = [],
-						i,
-						l;
+                    var patterns = handleFiles(contents, "");
 
-					for (i = 0, l = contents.length; i < l; i += 1) {
-						if (contents[i].substr(-5) === '.html') {
-							files.push(contents[i]);
-						}
-					}
-
-					handleFiles(files);
+                    outputPatterns(patterns);
 				});
 			};
 
@@ -117,8 +140,7 @@ if (process.argv[2] === '--tofile') {
 	primer(null, true, function (content) {
 		var fs = require('fs');
 		fs.writeFile('./' + settings.tofile_outputpath + '/index.html', content, 'utf-8', function () {
-			util.pump(fs.createReadStream('./' + settings.wwwroot + '/global.css'),
-				fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
+			fs.createReadStream('./' + settings.wwwroot + '/global.css').pipe(fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
 			util.puts('Stand-alone output can now be found in "' + settings.tofile_outputpath + '/"');
 		});
 	});
