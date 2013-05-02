@@ -1,14 +1,18 @@
 /*jslint nomen: true */
 'use strict';
 
-var settings = {
-		webserverport : '8080',
-		wwwroot: 'public',
-		pattern_path: 'public/patterns',
-		sourcehtmlfile: 'source.html',
-		tofile_outputpath: 'docs'
-	},
-	util = require('util'),
+//settings = {
+//    webserverport : '8080',
+//    wwwroot: 'public',
+//    pattern_path: 'public/patterns',
+//    sourcehtmlfile: 'source.html',
+//    tofile_outputpath: 'docs'
+//},
+
+
+
+var util = require('util'),
+    settings = require('./pp-settings.json'),
 	connect = require('connect'),
 	primer = function (serverResponse, tofile, tofileCallback) {
 		tofile = tofile || false;

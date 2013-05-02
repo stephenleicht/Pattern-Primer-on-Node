@@ -1,0 +1,6 @@
+{
+    "pattern_path": "patterns",
+    "sourcehtmlfile": "source.html",
+    "tofile_outputpath": "../../docs",
+    "css_file": "../../public/css/syncrofy_one.css"
+}
