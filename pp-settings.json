@@ -4,5 +4,5 @@
     "pattern_path": "public/patterns",
     "source_html_file": "source.html",
     "tofile_outputpath": "docs",
-    "css_file": "../../public/css/syncrofy_one.css"
+    "css_file": "public/global.css"
 }

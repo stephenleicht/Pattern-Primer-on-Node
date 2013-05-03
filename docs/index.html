@@ -1,96 +1,89 @@
 <!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<title>Pattern Primer</title>
-<link rel="stylesheet" href="global.css">
-<style>
-.pattern {
-    clear: both;
-    overflow: hidden;
-}
-.pattern .display {
-    width: 65%;
-    float: left;
-}
-.pattern .source {
-    width: 30%;
-    float: right;
-}
-.pattern .source textarea {
-    width: 90%;
-}
-</style>
-</head>
-<body><h2>Form Items</h2><h3>Buttons</h3><div class="pattern"><div class="display"><button>Button element</button>
+<html>
+    <head>
+    <meta charset="utf-8" />
+    <title>Pattern Primer</title>
+    <link rel="stylesheet" href="global.css" />
+    <style>
+    .pattern {
+        clear: both;
+        overflow: hidden;
+    }
+    .pattern .display {
+        width: 65%;
+        float: left;
+    }
+    .pattern .source {
+        width: 30%;
+        float: right;
+    }
+    .pattern .source textarea {
+        width: 90%;
+    }
+    </style>
+    </head>
+    <body><h2 id="FormItems">Form Items</h2><h3>Buttons</h3><div class="pattern"><div class="display"><button>Button element</button>
 
-<input type="submit" value="Submit button">
+<input type="submit" value="Submit button" /></div><div class="source"><textarea rows="6" cols="30">&lt;button&gt;Button element&lt;/button&gt;
 
-<a href="#" class="button">Button</a>
+&lt;input type="submit" value="Submit button"&gt;</textarea></div></div><h3>Checkbox</h3><div class="pattern"><div class="display"><label><input type="checkbox" name="check" /> check 1</label> <br />
+<label><input type="checkbox" name="check" /> check 2</label> <br />
+<label><input type="checkbox" name="check" /> check 3</label> <br />
+<label><input type="checkbox" name="check" /> check 4</label> <br /></div><div class="source"><textarea rows="6" cols="30">&lt;label&gt;&lt;input type="checkbox" name="check"&gt; check 1&lt;/label&gt; &lt;br/&gt;
+&lt;label&gt;&lt;input type="checkbox" name="check"&gt; check 2&lt;/label&gt; &lt;br/&gt;
+&lt;label&gt;&lt;input type="checkbox" name="check"&gt; check 3&lt;/label&gt; &lt;br/&gt;
+&lt;label&gt;&lt;input type="checkbox" name="check"&gt; check 4&lt;/label&gt; &lt;br/&gt;</textarea></div></div><h3>Inputs</h3><div class="pattern"><div class="display"><label for="textBox">Text Box</label>
+<input type="text" id="textBox" />
 
-<a href="#" class="button primary">Primary Button</a></div><div class="source"><textarea rows="6" cols="30">&lt;button>Button element&lt;/button>
-
-&lt;input type=&quot;submit&quot; value=&quot;Submit button&quot;>
-
-&lt;a href=&quot;#&quot; class=&quot;button&quot;>Button&lt;/a>
-
-&lt;a href=&quot;#&quot; class=&quot;button primary&quot;>Primary Button&lt;/a></textarea></div></div><h3>Checkbox</h3><div class="pattern"><div class="display"><label><input type="checkbox" name="check"> check 1</label> <br/>
-<label><input type="checkbox" name="check"> check 2</label> <br/>
-<label><input type="checkbox" name="check"> check 3</label> <br/>
-<label><input type="checkbox" name="check"> check 4</label> <br/></div><div class="source"><textarea rows="6" cols="30">&lt;label>&lt;input type=&quot;checkbox&quot; name=&quot;check&quot;> check 1&lt;/label> &lt;br/>
-&lt;label>&lt;input type=&quot;checkbox&quot; name=&quot;check&quot;> check 2&lt;/label> &lt;br/>
-&lt;label>&lt;input type=&quot;checkbox&quot; name=&quot;check&quot;> check 3&lt;/label> &lt;br/>
-&lt;label>&lt;input type=&quot;checkbox&quot; name=&quot;check&quot;> check 4&lt;/label> &lt;br/></textarea></div></div><h3>Inputs</h3><div class="pattern"><div class="display"><label for="textBox">Text Box</label>
-<input id="textBox" type="text"/>
-
-<br/>
+<br />
 <label for="numberBox">Number Box</label>
-<input type="number" id="numberBox"/>
+<input type="number" id="numberBox" />
 
-<br/>
+<br />
 <label for="urlBox">Url Box</label>
-<input type="url" id="urlBox"/>
+<input type="url" id="urlBox" />
 
-<br/>
+<br />
 <label for="emailBox">Email Box</label>
-<input type="email" id="emailBox"/>
+<input type="email" id="emailBox" />
 
-<br/>
+<br />
 <label for="passwordBox">Password Box</label>
-<input type="password" id="passwordBox"/>
+<input type="password" id="passwordBox" />
 
-</div><div class="source"><textarea rows="6" cols="30">&lt;label for=&quot;textBox&quot;>Text Box&lt;/label>
-&lt;input id=&quot;textBox&quot; type=&quot;text&quot;/>
+</div><div class="source"><textarea rows="6" cols="30">&lt;label for="textBox"&gt;Text Box&lt;/label&gt;
+&lt;input id="textBox" type="text"/&gt;
 
-&lt;br/>
-&lt;label for=&quot;numberBox&quot;>Number Box&lt;/label>
-&lt;input type=&quot;number&quot; id=&quot;numberBox&quot;/>
+&lt;br/&gt;
+&lt;label for="numberBox"&gt;Number Box&lt;/label&gt;
+&lt;input type="number" id="numberBox"/&gt;
 
-&lt;br/>
-&lt;label for=&quot;urlBox&quot;>Url Box&lt;/label>
-&lt;input type=&quot;url&quot; id=&quot;urlBox&quot;/>
+&lt;br/&gt;
+&lt;label for="urlBox"&gt;Url Box&lt;/label&gt;
+&lt;input type="url" id="urlBox"/&gt;
 
-&lt;br/>
-&lt;label for=&quot;emailBox&quot;>Email Box&lt;/label>
-&lt;input type=&quot;email&quot; id=&quot;emailBox&quot;/>
+&lt;br/&gt;
+&lt;label for="emailBox"&gt;Email Box&lt;/label&gt;
+&lt;input type="email" id="emailBox"/&gt;
 
-&lt;br/>
-&lt;label for=&quot;passwordBox&quot;>Password Box&lt;/label>
-&lt;input type=&quot;password&quot; id=&quot;passwordBox&quot;/>
+&lt;br/&gt;
+&lt;label for="passwordBox"&gt;Password Box&lt;/label&gt;
+&lt;input type="password" id="passwordBox"/&gt;
 
-</textarea></div></div><h3>Radio Buttons</h3><div class="pattern"><div class="display"><label><input type="radio" name="demo" value="Value1"/>Value 1</label>
-<br/>
-<label><input type="radio" name="demo" value="Value2"/>Value 2</label>
-<br/>
-<label><input type="radio" name="demo" value="Value2"/>Value 3</label>
-<br/>
-<label><input type="radio" name="demo" value="Value2"/>Value 4</label>
-</div><div class="source"><textarea rows="6" cols="30">&lt;label>&lt;input type=&quot;radio&quot; name=&quot;demo&quot; value=&quot;Value1&quot;/>Value 1&lt;/label>
-&lt;br/>
-&lt;label>&lt;input type=&quot;radio&quot; name=&quot;demo&quot; value=&quot;Value2&quot;/>Value 2&lt;/label>
-&lt;br/>
-&lt;label>&lt;input type=&quot;radio&quot; name=&quot;demo&quot; value=&quot;Value2&quot;/>Value 3&lt;/label>
-&lt;br/>
-&lt;label>&lt;input type=&quot;radio&quot; name=&quot;demo&quot; value=&quot;Value2&quot;/>Value 4&lt;/label>
+</textarea></div></div><h3>Radio Buttons</h3><div class="pattern"><div class="display"><label><input type="radio" name="demo" value="Value1" />Value 1</label>
+<br />
+<label><input type="radio" name="demo" value="Value2" />Value 2</label>
+<br />
+<label><input type="radio" name="demo" value="Value2" />Value 3</label>
+<br />
+<label><input type="radio" name="demo" value="Value2" />Value 4</label>
+</div><div class="source"><textarea rows="6" cols="30">&lt;label&gt;&lt;input type="radio" name="demo" value="Value1"/&gt;Value 1&lt;/label&gt;
+&lt;br/&gt;
+&lt;label&gt;&lt;input type="radio" name="demo" value="Value2"/&gt;Value 2&lt;/label&gt;
+&lt;br/&gt;
+&lt;label&gt;&lt;input type="radio" name="demo" value="Value2"/&gt;Value 3&lt;/label&gt;
+&lt;br/&gt;
+&lt;label&gt;&lt;input type="radio" name="demo" value="Value2"/&gt;Value 4&lt;/label&gt;
 </textarea></div></div><h3>Select</h3><div class="pattern"><div class="display"><select>
     <optgroup label="Opt group 1">
         <option>option text</option>
@@ -104,41 +97,42 @@
         <option>option text 7</option>
         <option>option text 8</option>
     </optgroup>
-</select></div><div class="source"><textarea rows="6" cols="30">&lt;select>
-    &lt;optgroup label=&quot;Opt group 1&quot;>
-        &lt;option>option text&lt;/option>
-        &lt;option>option text 2&lt;/option>
-        &lt;option>option text 3&lt;/option>
-        &lt;option>option text 4&lt;/option>
-    &lt;/optgroup>
-    &lt;optgroup label=&quot;Opt group 2&quot;>
-        &lt;option>option text 5&lt;/option>
-        &lt;option>option text 6&lt;/option>
-        &lt;option>option text 7&lt;/option>
-        &lt;option>option text 8&lt;/option>
-    &lt;/optgroup>
-&lt;/select></textarea></div></div><h3>Text Area</h3><div class="pattern"><div class="display"><label>Label text</label>
-<textarea rows="5" cols="20"></textarea></div><div class="source"><textarea rows="6" cols="30">&lt;label>Label text&lt;/label>
-&lt;textarea rows=&quot;5&quot; cols=&quot;20&quot;>&lt;/textarea></textarea></div></div><h2>Lists</h2><h3>Ordered</h3><div class="pattern"><div class="display"><ol>
+</select></div><div class="source"><textarea rows="6" cols="30">&lt;select&gt;
+    &lt;optgroup label="Opt group 1"&gt;
+        &lt;option&gt;option text&lt;/option&gt;
+        &lt;option&gt;option text 2&lt;/option&gt;
+        &lt;option&gt;option text 3&lt;/option&gt;
+        &lt;option&gt;option text 4&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Opt group 2"&gt;
+        &lt;option&gt;option text 5&lt;/option&gt;
+        &lt;option&gt;option text 6&lt;/option&gt;
+        &lt;option&gt;option text 7&lt;/option&gt;
+        &lt;option&gt;option text 8&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;</textarea></div></div><h3>Text Area</h3><div class="pattern"><div class="display"><label>Label text</label>
+<textarea rows="5" cols="20"></textarea></div><div class="source"><textarea rows="6" cols="30">&lt;label&gt;Label text&lt;/label&gt;
+&lt;textarea rows="5" cols="20"&gt;&lt;/textarea&gt;</textarea></div></div><h2 id="Lists">Lists</h2><h3>Ordered</h3><div class="pattern"><div class="display"><ol>
 <li>First list item</li>
 <li>Second item in a list of ordered items</li>
 <li>Third item in the list</li>
 </ol>
-</div><div class="source"><textarea rows="6" cols="30">&lt;ol>
-&lt;li>First list item&lt;/li>
-&lt;li>Second item in a list of ordered items&lt;/li>
-&lt;li>Third item in the list&lt;/li>
-&lt;/ol>
+</div><div class="source"><textarea rows="6" cols="30">&lt;ol&gt;
+&lt;li&gt;First list item&lt;/li&gt;
+&lt;li&gt;Second item in a list of ordered items&lt;/li&gt;
+&lt;li&gt;Third item in the list&lt;/li&gt;
+&lt;/ol&gt;
 </textarea></div></div><h3>Unordered</h3><div class="pattern"><div class="display"><ul>
 <li>A list item</li>
 <li>Another item in a list</li>
 <li>Yet another item in this list of items</li>
-</ul></div><div class="source"><textarea rows="6" cols="30">&lt;ul>
-&lt;li>A list item&lt;/li>
-&lt;li>Another item in a list&lt;/li>
-&lt;li>Yet another item in this list of items&lt;/li>
-&lt;/ul></textarea></div></div><h2>Text</h2><h3>Block Quote</h3><div class="pattern"><div class="display"><blockquote>
+</ul></div><div class="source"><textarea rows="6" cols="30">&lt;ul&gt;
+&lt;li&gt;A list item&lt;/li&gt;
+&lt;li&gt;Another item in a list&lt;/li&gt;
+&lt;li&gt;Yet another item in this list of items&lt;/li&gt;
+&lt;/ul&gt;</textarea></div></div><h2 id="Text">Text</h2><h3>Block Quote</h3><div class="pattern"><div class="display"><blockquote>
     <p>This text is quoted. A block of quoted text like this is particularly useful when presented as a pull-quote within an article of text.</p>
-</blockquote></div><div class="source"><textarea rows="6" cols="30">&lt;blockquote>
-    &lt;p>This text is quoted. A block of quoted text like this is particularly useful when presented as a pull-quote within an article of text.&lt;/p>
-&lt;/blockquote></textarea></div></div><h3>Heading 1</h3><div class="pattern"><div class="display"><h1>Level one heading</h1></div><div class="source"><textarea rows="6" cols="30">&lt;h1>Level one heading&lt;/h1></textarea></div></div><h3>Heading 2</h3><div class="pattern"><div class="display"><h2>Level two heading</h2></div><div class="source"><textarea rows="6" cols="30">&lt;h2>Level two heading&lt;/h2></textarea></div></div><h3>Heading 3</h3><div class="pattern"><div class="display"><h3>Level three heading</h3></div><div class="source"><textarea rows="6" cols="30">&lt;h3>Level three heading&lt;/h3></textarea></div></div><h3>Heading 4</h3><div class="pattern"><div class="display"><h4>Level four heading</h4></div><div class="source"><textarea rows="6" cols="30">&lt;h4>Level four heading&lt;/h4></textarea></div></div><h3>Heading 5</h3><div class="pattern"><div class="display"><h5>Level five heading</h5></div><div class="source"><textarea rows="6" cols="30">&lt;h5>Level five heading&lt;/h5></textarea></div></div><h3>Heading 6</h3><div class="pattern"><div class="display"><h6>Level six heading</h6></div><div class="source"><textarea rows="6" cols="30">&lt;h6>Level six heading&lt;/h6></textarea></div></div><h3>Text</h3><div class="pattern"><div class="display"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem distinctio earum exercitationem expedita incidunt iste iure labore necessitatibus nihil numquam, possimus quae quaerat qui, quisquam recusandae sunt velit vitae voluptatibus!</p></div><div class="source"><textarea rows="6" cols="30">&lt;p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem distinctio earum exercitationem expedita incidunt iste iure labore necessitatibus nihil numquam, possimus quae quaerat qui, quisquam recusandae sunt velit vitae voluptatibus!&lt;/p></textarea></div></div></body></html>
+</blockquote></div><div class="source"><textarea rows="6" cols="30">&lt;blockquote&gt;
+    &lt;p&gt;This text is quoted. A block of quoted text like this is particularly useful when presented as a pull-quote within an article of text.&lt;/p&gt;
+&lt;/blockquote&gt;</textarea></div></div><h3>Heading 1</h3><div class="pattern"><div class="display"><h1>Level one heading</h1></div><div class="source"><textarea rows="6" cols="30">&lt;h1&gt;Level one heading&lt;/h1&gt;</textarea></div></div><h3>Heading 2</h3><div class="pattern"><div class="display"><h2>Level two heading</h2></div><div class="source"><textarea rows="6" cols="30">&lt;h2&gt;Level two heading&lt;/h2&gt;</textarea></div></div><h3>Heading 3</h3><div class="pattern"><div class="display"><h3>Level three heading</h3></div><div class="source"><textarea rows="6" cols="30">&lt;h3&gt;Level three heading&lt;/h3&gt;</textarea></div></div><h3>Heading 4</h3><div class="pattern"><div class="display"><h4>Level four heading</h4></div><div class="source"><textarea rows="6" cols="30">&lt;h4&gt;Level four heading&lt;/h4&gt;</textarea></div></div><h3>Heading 5</h3><div class="pattern"><div class="display"><h5>Level five heading</h5></div><div class="source"><textarea rows="6" cols="30">&lt;h5&gt;Level five heading&lt;/h5&gt;</textarea></div></div><h3>Heading 6</h3><div class="pattern"><div class="display"><h6>Level six heading</h6></div><div class="source"><textarea rows="6" cols="30">&lt;h6&gt;Level six heading&lt;/h6&gt;</textarea></div></div><h3>Text</h3><div class="pattern"><div class="display"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem distinctio earum exercitationem expedita incidunt iste iure labore necessitatibus nihil numquam, possimus quae quaerat qui, quisquam recusandae sunt velit vitae voluptatibus!</p></div><div class="source"><textarea rows="6" cols="30">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem distinctio earum exercitationem expedita incidunt iste iure labore necessitatibus nihil numquam, possimus quae quaerat qui, quisquam recusandae sunt velit vitae voluptatibus!&lt;/p&gt;</textarea></div></div></body>
+</html>

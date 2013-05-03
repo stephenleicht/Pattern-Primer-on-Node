@@ -1,0 +1,9 @@
+{
+  "name": "Pattern-Primer",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jsdom": "~0.6.0",
+    "connect": "~2.7.7"
+  }
+}

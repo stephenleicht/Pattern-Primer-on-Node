@@ -4,46 +4,58 @@
 var util = require('util'),
     settings = require('./pp-settings.json'),
 	connect = require('connect'),
-	primer = function (serverResponse, tofile, tofileCallback) {
-		tofile = tofile || false;
+    jsdom = require('jsdom'),
+    fs = require('fs');
 
-		var fs = require('fs'),
-			patternFolder = './' + settings.pattern_path,
-			simpleEscaper = function (text) {
-				return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-			},
-			outputPatterns = function (patterns) {
-				fs.readFile(settings.source_html_file, 'utf-8', function (err, content) {
-                    if (err !== null) {
-                        util.puts('There was an error when trying to read file:', 'output.html');
-                        return;
+var primer = function (serverResponse, tofile, tofileCallback)
+    {
+        tofile = tofile || false;
+
+        var patternFolder = './' + settings.pattern_path,
+            simpleEscaper = function (text) {
+                return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+            },
+            outputPatterns = function (patterns)
+            {
+                jsdom.env(
+                    settings.source_html_file,
+                    [],
+                    function (errors, window)
+                    {
+                        if (errors !== null) {
+                            util.puts('There was an error when trying to read file:',settings.source_html_file);
+                            return;
+                        }
+
+                        var document = window.document;
+                        document.body.innerHTML = generatePatterns(patterns);
+
+                        var output = window.document.doctype + window.document.innerHTML;
+
+                        if (tofile)
+                        {
+                            tofileCallback(output);
+                        }
+                        else
+                        {
+                            serverResponse.end(output);
+                        }
                     }
-
-                    content += generatePatterns(patterns);
-
-                    content += '</body></html>';
-
-					if (tofile) {
-						tofileCallback(content);
-					} else {
-						serverResponse.end(content);
-					}
-				});
-			},
+                );
+            },
             generatePatterns = function(patterns)
             {
                 var content = "";
-                var i,
-                    l,
-                    file;
+                var file;
 
-                for (i = 0, l = patterns.length; i < l; i += 1)
+                for (var i = 0, len = patterns.length; i < len; i++)
                 {
                     file = patterns[i];
 
                     if(!file.isFile)
                     {
-                        content += '<h2>' + file.filename + '</h2>';
+                        var noSpaceName = file.filename.replace(' ', '');
+                        content += '<h2 id="'+noSpaceName+'">' + file.filename + '</h2>';
                         content += generatePatterns(file.subFiles);
                     }
                     else
@@ -64,9 +76,11 @@ var util = require('util'),
                 return content;
 
             },
-			handleFiles = function (items, pathPrefix) {
+            handleFiles = function (items, pathPrefix) {
                 var file,
                     patterns = [];
+
+                pathPrefix = pathPrefix || "";
 
                 // This was asyncronous, but we need the file names, which we can't get from the callback of 'readFile'
                 for (var i = 0, len = items.length; i < len; i += 1)
@@ -103,44 +117,45 @@ var util = require('util'),
                 }
 
                 return patterns;
-			},
-			beginProcess = function () {
-				fs.readdir(patternFolder, function (err, contents) {
+            },
+            beginProcess = function () {
+                fs.readdir(patternFolder, function (err, contents) {
                     if (err !== null && err.code === 'ENOENT') {
                         util.puts('Cannot find patterns folder:', patternFolder);
                         return;
                     }
 
-                    var patterns = handleFiles(contents, "");
+                    var patterns = handleFiles(contents);
 
                     outputPatterns(patterns);
-				});
-			};
+                });
+            };
 
-		beginProcess();
-	},
-	server = connect.createServer(
-		connect.static(__dirname + '/' + settings.wwwroot),
-		function (req, resp) {
-			if (req.url !== '/') {
-				resp.writeHead(404, {
-					'Content-Length': 0,
-					'Content-Type': 'text/plain'
-				});
-				resp.end();
-				return;
-			}
+        beginProcess();
+    },
+    server = connect.createServer(
+        connect.static(__dirname + '/' + settings.wwwroot),
+        function (req, resp) {
+            if (req.url !== '/') {
+                resp.writeHead(404, {
+                    'Content-Length': 0,
+                    'Content-Type': 'text/plain'
+                });
+                resp.end();
+                return;
+            }
 
-			primer(resp);
-		}
-	);
+            primer(resp);
+        }
+    );
 
 if (process.argv[2] === '--tofile') {
 
 	primer(null, true, function (content) {
 		var fs = require('fs');
 		fs.writeFile('./' + settings.tofile_outputpath + '/index.html', content, 'utf-8', function () {
-			fs.createReadStream('./' + settings.wwwroot + '/global.css').pipe(fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
+
+            fs.createReadStream('./' + settings.css_file).pipe(fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
 			util.puts('Stand-alone output can now be found in "' + settings.tofile_outputpath + '/"');
 		});
 	});
